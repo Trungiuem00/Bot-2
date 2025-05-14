@@ -2,7 +2,7 @@ import discord
 import asyncio
 import os
 import threading
-from flask import Flask
+from flask import Flask, send_from_directory
 from dotenv import load_dotenv
 
 # Tải token từ file .env
@@ -35,7 +35,7 @@ async def on_message(message):
     if message.author.id != OWNER_ID:
         return
 
-    if message.content.strip().lower() == "?spam":
+    if message.content.strip().lower() == "!spam":
         if spamming.get(message.channel.id):
             await message.channel.send("Đang spam rồi!")
             return
@@ -70,6 +70,11 @@ def index():
 @app.route('/ping')
 def ping():
     return "pong"
+
+@app.route('/favicon.ico')
+def favicon():
+    return send_from_directory(os.path.join(app.root_path, 'static'),
+                               'favicon.ico', mimetype='image/vnd.microsoft.icon')
 
 # Chạy Flask song song với bot
 def run_flask():
