@@ -10,7 +10,7 @@ load_dotenv()
 TOKEN = os.getenv("DISCORD_TOKEN")
 
 # Cấu hình bot
-CHANNEL_ID = 1364890790937231397
+CHANNEL_ID = 1364890863410352180
 OWNER_ID = 1328308734627418213
 FILE_PATH = 'noidung.txt'
 
@@ -35,7 +35,7 @@ async def on_message(message):
     if message.author.id != OWNER_ID:
         return
 
-    if message.content.strip().lower() == "!spam":
+    if message.content.strip().lower() == "/ngu":
         if spamming.get(message.channel.id):
             await message.channel.send("Đang spam rồi!")
             return
